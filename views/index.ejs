@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include("./template/head") %>
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            <%= title %>
+        </h1>
+        <p>Welcome to
+            <%= title %>
+        </p>
+
+        <ul>
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/signup">Signup</a></li>
+            <hr>
+            <li><a href="/feed">Posts Feed</a></li>
+            <li><a href="/feed/single/1">Single Post</a></li>
+            <hr>
+            <li><a href="/post/new">New Post</a></li>
+            <hr>
+            <li><a href="/profile/">Profile</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>

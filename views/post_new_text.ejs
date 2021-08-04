@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Single Post</title>
+
+    <%- include('./template/head'); %>
+        <style>
+            @media (min-width: 1200px) {
+                .container,
+                .container-lg,
+                .container-md,
+                .container-sm,
+                .container-xl {
+                    max-width: 600px !important;
+                }
+            }
+        </style>
+</head>
+
+<body>
+
+    <div class="container pt-4">
+
+        <div>
+            <h1>New Post</h1>
+            <div>
+                <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=uploadImage" width="100%" alt="">
+            </div>
+            <br>
+
+            <form action="/post/post" method="post">
+                <input type="text" name="imageurl" style="display: none;">
+                <textarea name="comment" class="form-control" placeholder="leave your comment" style="margin-bottom: 12px;" rows="5"></textarea>
+
+                <div style="text-align: center;">
+                    <button class="btn btn-success">Post it </button>
+                </div>
+
+            </form>
+
+        </div>
+
+</body>
+
+</html>

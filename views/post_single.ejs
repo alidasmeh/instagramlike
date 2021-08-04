@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Single Post</title>
+
+    <%- include('./template/head'); %>
+        <style>
+            @media (min-width: 1200px) {
+                .container,
+                .container-lg,
+                .container-md,
+                .container-sm,
+                .container-xl {
+                    max-width: 600px !important;
+                }
+            }
+            
+            .fas.fa-hand-holding-heart {
+                cursor: pointer;
+            }
+        </style>
+</head>
+
+<body>
+
+    <div class="container pt-4">
+
+        <div>
+            <h1>Ali Dasmeh posted</h1>
+            <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
+        </div>
+        <br>
+        <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=InstagramLike" alt="">
+
+        <div class="pt-2" style="font-size:22px">
+            <i class="fas fa-hand-holding-heart" onclick="like('12o32328asdf')"></i> 12
+            <span> | </span>
+            <i class="fas fa-comments"></i> 2
+        </div>
+        <div class="pt-2">
+            <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Ali Dasmeh</strong> In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p>
+        </div>
+        <hr>
+
+        <div class="comments">
+
+            <div class="comment">
+                <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
+                <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Mohammad Salehi</strong> In publishing and graphic design, Lorem ipsum.</p>
+            </div>
+            <hr>
+
+            <div class="comment">
+                <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 5</small>
+                <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Masood Khalili</strong> In publishing and graphic design, Lorem ipsum. Lorem ipsum.</p>
+            </div>
+            <hr>
+
+        </div>
+
+        <form action="" method="post">
+            <textarea name="comment" class="form-control" placeholder="leave your comment" style="margin-bottom: 12px;" rows="5"></textarea>
+            <button class="btn btn-success">Send</button>
+        </form>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <script>
+        function like(postid) {
+            alert("ALERT : " + postid)
+        }
+    </script>
+</body>
+
+</html>
