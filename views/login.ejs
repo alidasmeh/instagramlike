@@ -13,7 +13,7 @@
 
         <h1>Login</h1>
 
-        <form action="" method="get">
+        <form action="" method="post">
             <div class="form-group">
                 <label>Username or Email:</label>
                 <input type="text" class="form-control" name="username">
@@ -23,9 +23,15 @@
                 <input type="password" class="form-control" name="password">
             </div>
 
+            <p style="color: tomato;">
+                <%= errors %>
+            </p>
+
             <div style="text-align: center;">
                 <button class="btn btn-primary" type="submit">Login</button>
             </div>
+
+            <a href="/auth/signup">Go for Signup.</a>
         </form>
     </div>
 

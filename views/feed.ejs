@@ -17,7 +17,10 @@
             }
             
             .fas.fa-hand-holding-heart {
-                cursor: pointer;
+                color: rgb(61, 61, 61);
+            }
+            .fas.fa-hand-holding-heart.liked{
+                color: rgb(255, 46, 46);
             }
         </style>
 </head>
@@ -27,41 +30,37 @@
     <div class="container pt-4">
 
         <h1>Posts</h1>
+        <a href="/logout">LogOut</a>
         <hr>
+        <a href="/post/new">
+            <button class="btn btn-secondary btn-block">New Post</button>
+        </a>
+        <br>
 
+        <% posts.forEach(post => { %> 
         <div class="single-post">
-            <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=InstagramLike" alt="">
+            <img src="<%= post.url %>" width="100%" alt="">
             <div class="pt-2" style="font-size:22px">
-                <i class="fas fa-hand-holding-heart" onclick="like('12o3128asdf')"></i> 12
+                <% if(post.liked){ %>
+                        <i class="fas fa-hand-holding-heart liked"></i> <%= post.likesnumber %>
+                <% }else{ %>
+                    <a href="/post/like/<%= post.postid %>">
+                        <i class="fas fa-hand-holding-heart" style="cursor:pointer"></i> <%= post.likesnumber %>
+                    </a>
+                <% } %>
                 <span> | </span>
-                <i class="fas fa-comments"></i> 2
+                <i class="fas fa-comments"></i> <%= post.commentsnumber %>
             </div>
-            <a href="/feed/single/1">
+            <a href="/feed/single/<%= post.postid %>">
                 <div class="pt-2">
-                    <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Ali Dasmeh</strong> In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p>
-                    <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
+                    <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px"><%= post.username %></strong> <%= post.description %></p>
+                    <small style="color: darkgray;font-weight: 100;">Posted at : <%= post.date %></small>
                 </div>
             </a>
         </div>
         <!-- single-post -->
         <hr>
-
-        <div class="single-post">
-            <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=InstagramLike" alt="">
-            <div class="pt-2" style="font-size:22px">
-                <i class="fas fa-hand-holding-heart" onclick="like('12o32328asdf')"></i> 5
-                <span> | </span>
-                <i class="fas fa-comments"></i> 12
-            </div>
-            <a href="/feed/single/2">
-                <div class="pt-2">
-                    <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Mohammad Reza Marvi</strong> In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p>
-                    <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
-                </div>
-            </a>
-        </div>
-        <!-- single-post -->
-        <hr>
+        <% }) %>
 
     </div>
 

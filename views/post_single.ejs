@@ -17,7 +17,10 @@
             }
             
             .fas.fa-hand-holding-heart {
-                cursor: pointer;
+                color: rgb(61, 61, 61);
+            }
+            .fas.fa-hand-holding-heart.liked{
+                color: rgb(255, 46, 46);
             }
         </style>
 </head>
@@ -28,38 +31,43 @@
 
         <div>
             <h1>Ali Dasmeh posted</h1>
-            <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
+            <small style="color: darkgray;font-weight: 100;">Posted at : <%= post.date %></small>
         </div>
         <br>
-        <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=InstagramLike" alt="">
+        <img src="<%= post.url %>" width="100%" alt="">
 
         <div class="pt-2" style="font-size:22px">
-            <i class="fas fa-hand-holding-heart" onclick="like('12o32328asdf')"></i> 12
+            <% if(post.liked){ %>
+                    <i class="fas fa-hand-holding-heart liked"></i> <%= post.likesnumber %>
+            <% }else{ %>
+                <a href="/post/likeFromSignlePost/<%= post.postid %>">
+                    <i class="fas fa-hand-holding-heart" style="cursor:pointer"></i> <%= post.likesnumber %>
+                </a>
+            <% } %>
             <span> | </span>
-            <i class="fas fa-comments"></i> 2
+            <i class="fas fa-comments"></i> <%= post.commentsnumber %>
         </div>
         <div class="pt-2">
-            <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Ali Dasmeh</strong> In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p>
+            <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px"> <%= post.username %></strong> <%= post.description %></p>
         </div>
         <hr>
 
+        <br>
+        <h3>Comments</h3>
         <div class="comments">
 
-            <div class="comment">
-                <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
-                <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Mohammad Salehi</strong> In publishing and graphic design, Lorem ipsum.</p>
-            </div>
-            <hr>
-
-            <div class="comment">
-                <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 5</small>
-                <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Masood Khalili</strong> In publishing and graphic design, Lorem ipsum. Lorem ipsum.</p>
-            </div>
-            <hr>
+            <% comments.forEach(comment=>{ %>
+                <div class="comment">
+                    <small style="color: darkgray;font-weight: 100;">Posted at : <%= comment.date %></small>
+                    <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px"> <%= comment.username %> </strong> <%= comment.text %></p>
+                </div>
+                <hr>
+            <% }) %>
 
         </div>
 
-        <form action="" method="post">
+        <form action="/post/leavecomment" method="post">
+            <input type="text" name="postid" value="<%= post.postid %>" style='display: none;'>
             <textarea name="comment" class="form-control" placeholder="leave your comment" style="margin-bottom: 12px;" rows="5"></textarea>
             <button class="btn btn-success">Send</button>
         </form>
@@ -69,11 +77,6 @@
     <br>
     <br>
     <br>
-    <script>
-        function like(postid) {
-            alert("ALERT : " + postid)
-        }
-    </script>
 </body>
 
 </html>

@@ -13,14 +13,14 @@
 
         <h1>Signup</h1>
 
-        <form action="" method="post">
+        <form action="" method="post" encType="multipart/form-data">
             <div class="form-group">
                 <label>Username:</label>
-                <input type="text" class="form-control" name="username">
+                <input type="text" class="form-control" name="username" value='<%= data.username %>'>
             </div>
             <div class="form-group">
                 <label>Email:</label>
-                <input type="email" class="form-control" name="email">
+                <input type="email" class="form-control" name="email" value='<%= data.email %>'>
             </div>
             <div class="form-group">
                 <label>Avatar:</label>
@@ -44,12 +44,17 @@
             </div>
 
             <ul>
-                <!-- <li>errors </li> -->
+                <% errors.forEach(error => { %>
+                    <li>
+                        <%= error %>
+                    </li>
+                    <% }) %>
             </ul>
             <div style="text-align: center;">
                 <button class="btn btn-primary" type="submit">Singup</button>
             </div>
 
+            <a href="/auth/login">Go for Login.</a>
         </form>
     </div>
 
