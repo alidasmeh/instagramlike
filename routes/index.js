@@ -4,6 +4,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'InstagramLike' });
     console.log("req.cookies.userID : ", req.cookies.userID)
+    // console.log(req.headers);
 });
 
 router.get('/logout', (req, res, next)=>{
