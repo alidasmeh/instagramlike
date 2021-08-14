@@ -24,7 +24,7 @@
 
         <div>
             <h1>New Post</h1>
-            <form action="/post/imageupload" method="POST">
+            <form action="/post/imageupload" enctype="multipart/form-data" method="POST">
                 <input type="file" name="postimage">
                 <br><br>
                 <button class="btn btn-success" type="submit">Next</button>
