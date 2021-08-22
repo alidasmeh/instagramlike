@@ -5,54 +5,73 @@
     <title>Instagram-Like</title>
 
     <%- include('./template/head'); %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
 
-    <div class="container pt-4">
+    <div class="container py-4">
 
         <h1>Signup</h1>
 
-        <form action="" method="post">
+        <form method="POST" action="/auth/signup" enctype="multipart/form-data">
+
             <div class="form-group">
                 <label>Username:</label>
-                <input type="text" class="form-control" name="username">
+                <input type="text" class="form-control" name="username" id="username">
+                <span class="text-danger text-center" id="username_error" style="display: inline;"></span>
             </div>
             <div class="form-group">
                 <label>Email:</label>
-                <input type="email" class="form-control" name="email">
+                <input type="email" class="form-control" name="email" id="email">
+                <span class="text-danger text-center" id="email_error" style="display: inline;"></span>
             </div>
             <div class="form-group">
                 <label>Avatar:</label>
-                <input type="file" name="avatar">
+                <input type="file" name="avatar" id="avatar" >
+                <p><span class="text-danger text-center" id="avatar_error" style="display: inline;"></span></p>
             </div>
             <div class="form-group">
                 <label>Gender:</label>
-                <select name="gender" class="form-control">
+                <select name="gender" class="form-control" id="gender" >
                     <option value="0">Choose one...</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
+                <span class="text-danger text-center" id="gender_error" style="display: inline;"></span>
             </div>
             <div class="form-group">
                 <label>Password:</label>
-                <input type="password" class="form-control" name="password">
+                <input type="password" class="form-control" name="password" id="password">
+                <span class="text-danger text-center" id="password_error" style="display: inline;"></span>
             </div>
             <div class="form-group">
                 <label>Repeat Password:</label>
-                <input type="password" class="form-control" name="password2">
+                <input type="password" class="form-control" name="password2" id="password2">
+                <span class="text-danger text-center" id="password2_error" style="display: inline;"></span>
             </div>
 
             <ul>
-                <!-- <li>errors </li> -->
+                <% if (errors.length > 0){ %>
+                    <% errors.forEach( err => { %>
+                        <li style="color: red;"> <%= err %></li>
+                    <% }) %>
+                <% } %>
             </ul>
+
             <div style="text-align: center;">
-                <button class="btn btn-primary" type="submit">Singup</button>
+                <button class="btn btn-primary" type="submit" >Singup</button>
+            </div>
+
+            <div style="text-align: center;" class="mt-5">
+                <a href="/auth/login">Login</a>
             </div>
 
         </form>
+
     </div>
-
+    
+    <script src="/javascripts/signupScript.js"></script>
 </body>
-
 </html>

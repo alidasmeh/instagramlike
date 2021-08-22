@@ -5,71 +5,73 @@
     <title>Feed</title>
 
     <%- include('./template/head'); %>
-        <style>
-            @media (min-width: 1200px) {
-                .container,
-                .container-lg,
-                .container-md,
-                .container-sm,
-                .container-xl {
-                    max-width: 600px !important;
-                }
-            }
-            
-            .fas.fa-hand-holding-heart {
-                cursor: pointer;
-            }
-        </style>
+
 </head>
 
 <body>
 
-    <div class="container pt-4">
+    <%- include('./template/header'); %>
 
-        <h1>Posts</h1>
-        <hr>
+        <div class="container" style="margin-top:50px; margin-bottom: 50px;">
 
-        <div class="single-post">
-            <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=InstagramLike" alt="">
-            <div class="pt-2" style="font-size:22px">
-                <i class="fas fa-hand-holding-heart" onclick="like('12o3128asdf')"></i> 12
-                <span> | </span>
-                <i class="fas fa-comments"></i> 2
-            </div>
-            <a href="/feed/single/1">
-                <div class="pt-2">
-                    <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Ali Dasmeh</strong> In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p>
-                    <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
+            <% posts.forEach((post)=>{   %>
+                <!-- Render posts -->
+                <div class="single-post">
+
+
+                    <div class="d-flex justify-content-between">
+                        <div class="my-2">
+                            <img src="<%= post.avatar %>" alt="Avatar" class="avatar mr-1">
+                            <span><%= post.username %></span>
+                        </div>
+                        <div class="p-1 d-flex align-items-center">
+                            <a href="#">
+                                <i class="fas fa-ellipsis-v mr-3"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <img src="<%= post.url %>" alt=" " width="100% ">
+                    <div class="pt-2 " style="font-size:22px ">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a href="/feed/<%= post.postid %>">
+                                    <i class="<%= post.yourLike %>"></i>
+                                </a>
+                                <%= post.likes.length %>
+                                    <span> | </span>
+                                    <i class="fas fa-comments "></i>
+                                    <%= post.comments.length %>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <a href="/feed/single/<%= post.postid %> " style="text-decoration: none;">
+                        <div class="pt-2 ">
+                            <p style="font-weight: 100;color: #000; "><strong style="margin-right: 15px "><%= post.username %></strong>
+                                <%= post.description %>
+                            </p>
+                            <small style="color: darkgray;font-weight: 100; ">Posted at : <%= post.date %></small>
+                        </div>
+                    </a>
                 </div>
-            </a>
+                <!-- single-post -->
+
+                <hr>
+                <!-- Render posts -->
+
+                <% })  %>
         </div>
-        <!-- single-post -->
-        <hr>
 
-        <div class="single-post">
-            <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=InstagramLike" alt="">
-            <div class="pt-2" style="font-size:22px">
-                <i class="fas fa-hand-holding-heart" onclick="like('12o32328asdf')"></i> 5
-                <span> | </span>
-                <i class="fas fa-comments"></i> 12
-            </div>
-            <a href="/feed/single/2">
-                <div class="pt-2">
-                    <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Mohammad Reza Marvi</strong> In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p>
-                    <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
-                </div>
-            </a>
-        </div>
-        <!-- single-post -->
-        <hr>
+        <%- include('./template/footer'); %>
 
-    </div>
-
-    <script>
-        function like(postid) {
-            alert("ALERT : " + postid)
-        }
-    </script>
+            <script>
+                function like(postid) {
+                    alert("ALERT : " + postid)
+                }
+            </script>
 
 </body>
 
