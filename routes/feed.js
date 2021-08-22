@@ -14,8 +14,6 @@ var userInfo = (req) => {
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    // userInfo()
-
     let posts = connection.query(`SELECT * FROM posts JOIN users ON posts.userid = users.userid`)
 
     posts.forEach(post => {
