@@ -54,7 +54,7 @@ router.get('/:id', function(req, res, next) {
 
     } else {
 
-        connection.query(`INSERT INTO likes ( postid , userid ) VALUES ("${req.params.id}", "${userInfo().userid}")`)
+        connection.query(`INSERT INTO likes ( postid , userid, date ) VALUES ("${req.params.id}", "${userInfo().userid}", ${new Date().getTime()})`)
 
     }
     res.redirect('/feed');
