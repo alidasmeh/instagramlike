@@ -42,6 +42,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+// from here to bottom : Salehi
 router.get('/:id', function(req, res, next) {
 
     let yourLikeInThisPost = connection.query(`SELECT * FROM likes WHERE postid=${req.params.id} AND userid=${userInfo().userid}`)
@@ -59,7 +60,53 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/single/:id', function(req, res, next) {
-    res.render('post_single');
+    var result = connection.query(`SELECT * FROM posts WHERE postid='${req.params.id}'`);
+    if (result.length == 0) {
+        res.send("<h1>Error : Post not found! 404</h1>");
+    } else {
+        result = result[0];
+    }
+    var owner_info = connection.query(`SELECT username FROM users WHERE userid='${result.userid}'`)[0];
+    var likes = connection.query(`SELECT userid FROM likes WHERE postid='${req.params.id}'`);
+    var comments = connection.query(`SELECT userid,text,date FROM comments WHERE postid='${req.params.id}'`);
+    comments.forEach(comment => {
+        var who = connection.query(`SELECT username FROM users WHERE userid='${comment.userid}'`)[0];
+        comment.username = who.username;
+    });
+
+    var isLiked = {
+        color: "",
+        onclick: "onclick=like()"
+    };
+    likes.forEach(like => {
+        if (like.userid == Number(req.cookies.userID)) {
+            isLiked = {
+                color: "style=color:red;",
+                onclick: "onclick=err()"
+            }
+        }
+    });
+    res.render('post_single', {
+        post_info: result,
+        likes: likes,
+        isLiked: isLiked,
+        comments: comments,
+        owner_info: owner_info.username
+    });
+});
+
+router.post('/single/:id', function(req, res, next) {
+    var d = new Date();
+    var result = connection.query(`INSERT INTO likes (postid, userid, date) VALUES ('${req.params.id}', '${req.cookies.userID}', '${d.getTime()}')`);
+    console.log("done");
+    res.redirect('back');
+});
+
+router.post('/single/comment/:id', function(req, res, next) {
+    var d = new Date();
+    var result = connection.query(`INSERT INTO comments (postid,userid,text,date) VALUES ('${req.params.id}','${req.cookies.userID}','${req.body.comment}','${d.getTime()}')`);
+    console.log(result);
+    res.redirect(`../../../feed/single/${req.params.id}`);
 });
 
 

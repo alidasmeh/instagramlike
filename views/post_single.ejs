@@ -27,39 +27,35 @@
     <div class="container pt-4">
 
         <div>
-            <h1>Ali Dasmeh posted</h1>
-            <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
+            <h1><%= owner_info %> posted</h1>
+            <small style="color: darkgray;font-weight: 100;">Posted at : <%= new Date(Number(post_info.date)).toDateString(); %></small>
         </div>
         <br>
-        <img src="https://dummyimage.com/600x400/dbdbdb/696969&text=InstagramLike" alt="">
+        <img src=<%= post_info.url %> alt="" style='width: 100%;'>
 
         <div class="pt-2" style="font-size:22px">
-            <i class="fas fa-hand-holding-heart" onclick="like('12o32328asdf')"></i> 12
+            <i class="fas fa-hand-holding-heart" <%= isLiked.color %> <%= isLiked.onclick %> id="like"></i> <i id="like_length"><%= likes.length %></i>
             <span> | </span>
-            <i class="fas fa-comments"></i> 2
+            <i class="fas fa-comments"></i> <i><%= comments.length %></i>
         </div>
         <div class="pt-2">
-            <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Ali Dasmeh</strong> In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p>
+            <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px"><%= owner_info %></strong> <%= post_info.description %></p>
         </div>
         <hr>
 
         <div class="comments">
-
-            <div class="comment">
-                <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 4</small>
-                <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Mohammad Salehi</strong> In publishing and graphic design, Lorem ipsum.</p>
-            </div>
-            <hr>
-
-            <div class="comment">
-                <small style="color: darkgray;font-weight: 100;">Posted at : 2021 Aug 5</small>
-                <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px">Masood Khalili</strong> In publishing and graphic design, Lorem ipsum. Lorem ipsum.</p>
-            </div>
-            <hr>
-
+            <h4>Comments :</h4>
+            <% comments.forEach(function(comment) { %>
+                <div class="comment">
+                    <small style="color: darkgray;font-weight: 100;">Commented at : <%= new Date(Number(comment.date)).toDateString(); %></small>
+                    <p style="font-weight: 100;color: #000;"><strong style="margin-right: 15px"><%= comment.username %></strong> <%= comment.text %></p>
+                </div>
+                <hr>
+            <% }); %>
         </div>
 
-        <form action="" method="post">
+
+        <form action="comment/<%= post_info.postid %>" method="post">
             <textarea name="comment" class="form-control" placeholder="leave your comment" style="margin-bottom: 12px;" rows="5"></textarea>
             <button class="btn btn-success">Send</button>
         </form>
@@ -70,8 +66,18 @@
     <br>
     <br>
     <script>
-        function like(postid) {
-            alert("ALERT : " + postid)
+        function err() {
+            alert("You liked this post before!")
+        }
+
+        function like() {
+            axios.post("")
+                .then((response)=>{
+                    $("#like").css("color", "red");
+                    var like = document.getElementById("like_length");
+                    like.innerText = Number(like.innerText)+1;
+                    document.getElementById("like").onclick = function() {err()};
+                });
         }
     </script>
 </body>
