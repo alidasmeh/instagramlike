@@ -1,15 +1,3 @@
-# Muhammad Reza Marvi branch
+# This project was done as part of the students' training in MFT Tehran Saadat Abad (https://mftplus.com/).
 
-
-## Sections
-
- * Login
- * Sign up
-
-## Additional files
-
- * **public/javascript/signupScript.js :** Check signup inputs with jQuery and check existing username and emails
- * **uploads/images :** Photo upload path
- * **middlewares/upload_avatar.js :** Is a middleware for uploading photos
- * **middlewares/user_is_login.js :** Is a middleware to check login
- * **middlewares/user_is_not_login.js :** Is a middleware not to check login
+Every routes (as a module) was coded by one students. It was training for coding in a group and Learning Git. 
